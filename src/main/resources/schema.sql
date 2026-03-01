@@ -1,0 +1,36 @@
+DROP TABLE IF EXISTS CLIENTE;
+DROP TABLE IF EXISTS PRODUTO;
+DROP TABLE IF EXISTS PEDIDO_PRODUTO;
+DROP TABLE IF EXISTS PEDIDO;
+
+CREATE TABLE CLIENTE (
+                         CLIENTE_ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+                         CLIENTE_NOME VARCHAR(150) NOT NULL,
+                         CLIENTE_EMAIL VARCHAR(150),
+                         CLIENTE_DATA_CADASTRO DATE NOT NULL,
+                         CLIENTE_CPF VARCHAR(11) NOT NULL UNIQUE
+);
+
+CREATE TABLE PRODUTO (
+                         PRODUTO_ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+                         PRODUTO_NOME VARCHAR(150) NOT NULL,
+                         PRODUTO_DESCRICAO VARCHAR(255) NOT NULL,
+                         PRODUTO_VALOR DECIMAL(10,2) NOT NULL,
+                         PRODUTO_QTD_ESTOQUE INT NOT NULL,
+                         PRODUTO_DATA_CADASTRO DATE NOT NULL
+);
+
+CREATE TABLE PEDIDO (
+                        PEDIDO_ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+                        CLIENTE_ID BIGINT NOT NULL,
+                        PEDIDO_DATA DATE NOT NULL
+);
+
+CREATE TABLE PEDIDO_PRODUTO (
+                                PEDIDO_PRODUTO_ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                PEDIDO_ID BIGINT NOT NULL,
+                                PRODUTO_ID BIGINT NOT NULL,
+                                PRODUTO_VALOR DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+                                PRODUTO_QTD INT NOT NULL,
+                                PRODUTO_DESCONTO DECIMAL(10,2) NOT NULL
+);
